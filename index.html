@@ -1,67 +1,136 @@
 <html>
 
 <head>
-	<title>MQTT WebApp</title>
+	<title>Mr Clay MqttWeb</title>
+	<link rel="icon" type="icon" href="icon.png">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	 crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	 crossorigin="anonymous"></script>
+
 </head>
 <style>
-body{
-	background-image: url(https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero-00e10b1f.jpg);
-	background-size: 100%;
-}
-.form-control{
-	width: 90%;
+	body {
+		margin-top: 5%;
+		overflow: hidden;
+	}
+	#divConnect {
+		position: fixed;
+		width: 26%;
+		left: 5%;
+		margin-top: -25%;
+		background-color: white;
+		padding: 10px;
+		box-shadow: 5px 10px #888888;
+		border-radius: 5%;
+		height: 300px;
+	}
 
-}
-#btnPublish{
-	width: 40%;
-}
-#divConnect{
-	border: solid;
-	margin-right: 71%;
-	text-align: center;
-	/* border-radius: 10%; */
-	
-}
-#divPublish{
-	border: solid;
-	margin-left: 35%;
-	margin-right: 38%;
-	text-align: center;
-	margin-top: -22.1%;
-	padding-bottom: 1.35%;
-}
-#divSubscribe{
-	border: solid;
-	margin-left: 70%;
-	/* margin-right: 38%; */
-	text-align: center;
-	height: 42.55%;
-	margin-top: -21.75%;
-}
-#main{
-	margin: 3%;
-}
-h2{
-	color: aliceblue;	
-}
-label{
-	color:aliceblue;
-}
-#container{
-	border: double;
-	margin-left: 25%;
-	margin-right: 25%;	
-}
+	#divSubscribe {
+		position: fixed;
+		width: 26%;
+		left: 70%;
+		margin-top: -25%;
+		background-color: white;
+		padding: 10px;
+		box-shadow: 5px 10px #888888;
+		border-radius: 5%;
+		height: 300px;
+	}
+
+	#divPublish {
+		position: fixed;
+		margin-top: -25%;
+		width: 26%;
+		left: 38%;
+		background-color: white;
+		padding: 10px;
+		box-shadow: 5px 10px #888888;
+		border-radius: 5%;
+		height: 300px;
+	}
+
+	#messages {
+		position: relative;
+		width: 90%;
+		margin-top: 30%;
+		left: 5%;
+	}
+
+	.container{
+	  padding: 1rem;
+	  margin: 1rem;
+	}
+	.table-scroll{
+	  /*width:100%; */
+	  display: block;
+	  empty-cells: show;
+	  
+	  /* Decoration */
+	  border-spacing: 0;
+	  border: 1px solid;
+	}
+
+	.table-scroll thead{
+	  background-color: #f1f1f1;  
+	  position:relative;
+	  display: block;
+	  width:100%;
+	  overflow-y: scroll;
+	}
+
+	.table-scroll tbody{
+	  /* Position */
+	  display: block; position:relative;
+	  width:100%; overflow-y:scroll;
+	  /* Decoration */
+	  border-top: 1px solid rgba(0,0,0,0.2);
+	}
+
+	.table-scroll tr{
+	  width: 100%;
+	  display:flex;
+	}
+
+	.table-scroll td,.table-scroll th{
+	  flex-basis:100%;
+	  flex-grow:2;
+	  display: block;
+	  padding: 1rem;
+	  text-align:left;
+	}
+
+	/* Other options */
+
+	.table-scroll.small-first-col td:first-child,
+	.table-scroll.small-first-col th:first-child{
+	  flex-basis:20%;
+	  flex-grow:1;
+	}
+
+	.table-scroll tbody tr:nth-child(2n){
+	  background-color: rgba(130,130,170,0.1);
+	}
+
+	.body-half-screen{
+	  max-height: 30vh;
+	}
+
+	.small-col{flex-basis:10%;}
+
+	fieldset {
+		margin-left: 10%;
+	}
+
+	#status {
+		color: red;
+	}
+
 </style>
+
 <body>
-	<div>
-		<header>MQTT</header>
-	</div>	
+
 	<div id="main">
 		<div id="divConnect">
 			<center>
@@ -101,9 +170,8 @@ label{
 					<label for="payloadToPublish">Payload</label>
 					<input type="text" class="form-control" id="payloadToPublish" value="">
 				</div>
-			</form><center>
+			</form>
 			<button id="btnPublish" class="btn btn-success btn-block">Publish</button>
-		</center>
 		</div>
 
 		<div id="divSubscribe">
@@ -118,13 +186,12 @@ label{
 			</form>
 			<button id="btnSubscribe" class="btn btn-success">Subscribe</button>
 			<button id="btnUnsubscribe" class="btn btn-danger">Unsubscribe</button>
-			<hr>	
 		</div>
 	</div>
 	<div id="container">
 		<table id="messages" class="table table-hover table-scroll small-first-col">
 			<thead id="thead">
-				<tr><center><h2>Messages</h2></center></tr>
+				<tr class="bg-primary"><center><th><h2>Messages</h2></th></center></tr>
 				<tr>
 					<th scope="col">Topic</th>
 					<th scope="col">Payload</th>
@@ -132,7 +199,7 @@ label{
 				</tr>
 			</thead>
 			<tbody id="tbodyContainer" class="body-half-screen">
-
+				<tr class="content1" style="display:none"></tr>
 			</tbody>
 		</table>
 	</div>
