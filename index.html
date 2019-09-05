@@ -1,0 +1,144 @@
+<html>
+
+<head>
+	<title>MQTT WebApp</title>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	 crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	 crossorigin="anonymous"></script>
+</head>
+<style>
+body{
+	background-image: url(https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero-00e10b1f.jpg);
+	background-size: 100%;
+}
+.form-control{
+	width: 90%;
+
+}
+#btnPublish{
+	width: 40%;
+}
+#divConnect{
+	border: solid;
+	margin-right: 71%;
+	text-align: center;
+	/* border-radius: 10%; */
+	
+}
+#divPublish{
+	border: solid;
+	margin-left: 35%;
+	margin-right: 38%;
+	text-align: center;
+	margin-top: -22.1%;
+	padding-bottom: 1.35%;
+}
+#divSubscribe{
+	border: solid;
+	margin-left: 70%;
+	/* margin-right: 38%; */
+	text-align: center;
+	height: 42.55%;
+	margin-top: -21.75%;
+}
+#main{
+	margin: 3%;
+}
+h2{
+	color: aliceblue;	
+}
+label{
+	color:aliceblue;
+}
+#container{
+	border: double;
+	margin-left: 25%;
+	margin-right: 25%;	
+}
+</style>
+<body>
+	<div>
+		<header>MQTT</header>
+	</div>	
+	<div id="main">
+		<div id="divConnect">
+			<center>
+				<h2>Connect</h2>
+			</center>
+			<form>
+				<div class="form-group">
+					<label for="brokerAddress">Address</label>
+					<input type="text" class="form-control" id="brokerAddress" value="ws://broker.hivemq.com:8000/mqtt">
+				</div>
+			</form>
+			<button id="btnConnect" class="btn btn-success">Connect</button>
+			<button id="btnDisconnect" class="btn btn-danger">Disconnect</button>
+			<div>
+				<br>
+				<fieldset>
+					<legend>Status:</legend>
+					<center>
+						<i>
+							<h4 id="status">Disconnected</h4>
+						</i>
+					</center>
+				</fieldset>
+			</div>
+		</div>
+
+		<div id="divPublish">
+			<center>
+				<h2>Publish</h2>
+			</center>
+			<form>
+				<div class="form-group">
+					<label for="topicToPublish">Topic</label>
+					<input type="text" class="form-control" id="topicToPublish" value="">
+				</div>
+				<div class="form-group">
+					<label for="payloadToPublish">Payload</label>
+					<input type="text" class="form-control" id="payloadToPublish" value="">
+				</div>
+			</form><center>
+			<button id="btnPublish" class="btn btn-success btn-block">Publish</button>
+		</center>
+		</div>
+
+		<div id="divSubscribe">
+			<center>
+				<h2>Subscribe</h2>
+			</center>
+			<form>
+				<div class="form-group">
+					<label for="topicToSubscribe">Topic</label>
+					<input type="text" class="form-control" id="topicToSubscribe">
+				</div>
+			</form>
+			<button id="btnSubscribe" class="btn btn-success">Subscribe</button>
+			<button id="btnUnsubscribe" class="btn btn-danger">Unsubscribe</button>
+			<hr>	
+		</div>
+	</div>
+	<div id="container">
+		<table id="messages" class="table table-hover table-scroll small-first-col">
+			<thead id="thead">
+				<tr><center><h2>Messages</h2></center></tr>
+				<tr>
+					<th scope="col">Topic</th>
+					<th scope="col">Payload</th>
+					<th scope="col">Time Stamp</th>
+				</tr>
+			</thead>
+			<tbody id="tbodyContainer" class="body-half-screen">
+
+			</tbody>
+		</table>
+	</div>
+
+</body>
+<script src="scripts/browserMqtt.js"></script>
+<script src="scripts/controller.js"></script>
+
+</html>
