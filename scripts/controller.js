@@ -1,5 +1,4 @@
 var con = 0;
-// const controller = require('controller.js');
 const client = new controller.Client();
 $(document).ready(function () {
 	var rownum = 0;
