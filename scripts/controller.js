@@ -1,5 +1,4 @@
 var con = 0;
-const client = new Client();
 $(document).ready(function () {
 	var rownum = 0;
 	$("#btnConnect").click(function () {
